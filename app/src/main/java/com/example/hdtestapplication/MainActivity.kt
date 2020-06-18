@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(myIntent)
     }
 
-    fun updateCartSizeFromApi(): Unit {
+    private fun updateCartSizeFromApi(): Unit {
         val token = TokenManager.getCurrentToken();
 
         if (token != null) {
