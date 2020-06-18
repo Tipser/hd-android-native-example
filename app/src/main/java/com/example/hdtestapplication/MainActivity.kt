@@ -10,7 +10,6 @@ import com.mikepenz.iconics.typeface.library.fontawesome.FontAwesome
 
 class MainActivity : AppCompatActivity() {
 
-    private val apiClient = ApiClient(this)
     private var currentCartSize = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main);
 
         supportActionBar?.title = "HD native example"
-        Cookie.setValue("tipserToken", "eyJraWQiOm51bGwsImFsZyI6IlJTNTEyIn0.eyJpc3MiOiJUaXBzZXIiLCJqdGkiOiI2MHJhUk50QVUyc0Z6WV9yTGtfVnVRIiwiaWF0IjoxNTkyMzc2MzE5LCJleHAiOjE2MjM5MTIzMTksImNhcnRJZCI6IjVlZTliYmZmMGFmZTFiMDAwMTJhMTllMyJ9.LmFgGn06v_2I14br1PeWQaHy2HpF-VrtD30xGfkXgH0b8f1BsD43pcI9B_3Us-BUOTUMt0T1FRO-yCh-a1zQ-tBLRsLsHHB4jLuIHg8bROKDEtHDMnTZXhd8Wqe5Fmyh2K3PIHiCEhmJ1pN1BZ_5yfuOjuQFhQUMPcdtPCRLer-1SVC9n1yOsKnzZcjGnbl0SKBgZvJSiYAIis-g_dndEFmde2ZdNSuUjQctKarEGaNNTzIaHP2STEhdKopgU7WMtel4JxQIBsYz_CW7zPXPUBz0hgwpdMq_9GEqcGstnK-ZRLJBQ9j0kpdqe7HnufU86Qvc08oSOiRQSqq19GOdyw")
+        TokenManager.initializeToken(this)
     }
 
     override fun onResume() {
@@ -69,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         val token = getTokenFromCookie();
 
         if (token != null) {
-            apiClient.getCartSize(token) {
+            ApiClient.getCartSize(token) {
                 runOnUiThread{
                     this.currentCartSize = it
                     invalidateOptionsMenu()

@@ -1,12 +1,11 @@
 package com.example.hdtestapplication
 
-import androidx.appcompat.app.AppCompatActivity
 import okhttp3.*
 import okio.IOException
 import org.json.JSONException
 import org.json.JSONObject
 
-class ApiClient(private val context: AppCompatActivity) {
+object ApiClient {
     private val client = OkHttpClient()
 
     fun getCartSize(token: String, onSuccess: (cartSize: Int) -> Unit) {
@@ -27,6 +26,24 @@ class ApiClient(private val context: AppCompatActivity) {
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
+            }
+
+            override fun onFailure(call: Call, e: IOException) {
+                e.printStackTrace()
+            }
+        })
+    }
+
+    fun createAnonymousToken(onSuccess: (token: String) -> Unit) {
+        val request: Request = Request.Builder()
+            .url("https://t3-prod-api.tipser.com/v3/auth/anonymousToken")
+            .build()
+
+        val call: Call = client.newCall(request)
+        client.newCall(request).enqueue(object: Callback {
+            override fun onResponse(call: Call, response: Response) {
+                val token = response.body!!.string();
+                onSuccess(token)
             }
 
             override fun onFailure(call: Call, e: IOException) {
