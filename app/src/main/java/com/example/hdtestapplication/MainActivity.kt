@@ -60,12 +60,8 @@ class MainActivity : AppCompatActivity() {
         startActivity(myIntent)
     }
 
-    fun getTokenFromCookie(): String? {
-        return Cookie.getValue("tipserToken")
-    }
-
     fun updateCartSizeFromApi(): Unit {
-        val token = getTokenFromCookie();
+        val token = TokenManager.getCurrentToken();
 
         if (token != null) {
             ApiClient.getCartSize(token) {

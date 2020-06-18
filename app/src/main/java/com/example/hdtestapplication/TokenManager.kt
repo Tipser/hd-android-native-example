@@ -18,6 +18,10 @@ object TokenManager {
         }
     }
 
+    fun getCurrentToken() : String? {
+        return Cookie.getValue("tipserToken")
+    }
+
     private fun generateTokenFromApi(onSuccess: (token: String) -> Unit) {
         ApiClient.createAnonymousToken {
             onSuccess(it)
