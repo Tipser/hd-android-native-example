@@ -11,8 +11,6 @@ class CheckoutActivity : AppCompatActivity() {
         setContentView(R.layout.activity_checkout)
 
         val webView = findViewById<WebView>(R.id.checkoutWebView);
-        webView.webViewClient = WebViewClient()
-        webView.settings.domStorageEnabled = true
         webView.settings.javaScriptEnabled = true
         webView.loadUrl("https://www.tipser.com/checkout")
     }
